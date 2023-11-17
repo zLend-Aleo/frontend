@@ -36,7 +36,7 @@ export function Header() {
       </div>
       <div className="hidden md:flex md:gap-x-6">
         <Link href="/">Home</Link>
-        <Link href="/requests">Requests</Link>
+        <Link href="/request">Request</Link>
         <Link href="/payments">Payments</Link>
         <Link href="/account">Account</Link>
         <Link href="/leaderboard">Leaderboard</Link>
