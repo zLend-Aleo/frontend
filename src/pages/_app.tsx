@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app';
 import type { NextPageWithLayout } from '@/types';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, createContext, useContext } from 'react';
 import Head from 'next/head';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -21,14 +21,16 @@ type AppPropsWithLayout = AppProps & {
 };
 
 function CustomApp({ Component, pageProps }: AppPropsWithLayout) {
+
   const wallets = useMemo(
     () => [
       new LeoWalletAdapter({
-        appName: 'Leo NFT',
+        appName: 'Aleo Lend',
       }),
     ],
     []
   );
+
   const [queryClient] = useState(() => new QueryClient());
   const getLayout = Component.getLayout ?? ((page) => page);
   return (

@@ -5,7 +5,9 @@ import { useState } from 'react';
 
 import { WalletNotConnectedError } from "@demox-labs/aleo-wallet-adapter-base";
 import { useWallet } from "@demox-labs/aleo-wallet-adapter-react";
+import { LeoWalletAdapter } from "@demox-labs/aleo-wallet-adapter-leo";
 import React, { FC, useCallback } from "react";
+import { SignMessage } from '@/components/SignMessage';
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
@@ -22,32 +24,35 @@ type Transaction = {
 function Test({ Component, pageProps }: AppPropsWithLayout) {
 
   const { publicKey, requestTransactionHistory } = useWallet();
-  const [loanAmount, setLoanAmount] = useState<number>(0); 
-  const [loanDuration, setLoanDuration] = useState<number>(0); 
-  const [transactions, setTransactions] = useState<Transaction[]>([]); 
+  const [loanAmount, setLoanAmount] = useState<number>(0);
+  const [loanDuration, setLoanDuration] = useState<number>(0);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   const [icons] = useState({
-    Payback: 'Icon for Payback', 
+    Payback: 'Icon for Payback',
     History: 'Icon for History',
-    Invite: 'Icon for Invite', 
-    Account: 'Icon for Account' 
+    Invite: 'Icon for Invite',
+    Account: 'Icon for Account'
   });
 
   const handleButtonClick = (buttonName: string) => {
     console.log(`${buttonName} pressed`);
   };
 
-  const handleViewAllClick = async () => {
-    const program = "credits.aleo";
-    if (!publicKey) throw new WalletNotConnectedError();
-    if (requestTransactionHistory) {
-      const transactions = await requestTransactionHistory(program);
-      console.log("Transactions: " + transactions);
-    }
-    console.log('view');
+  // const handleViewAllClick = async () => {
 
 
-  };
+  //   // const program = ".aleo";
+
+  //   // if (!publicKey) throw new WalletNotConnectedError();
+  //   // if (requestTransactionHistory) {
+  //   //   const transactions = await requestTransactionHistory(program);
+  //   //   console.log("Transactions: " + transactions);
+  //   // }
+  //   console.log('view');
+
+
+  // };
 
   return (
 
@@ -79,9 +84,10 @@ function Test({ Component, pageProps }: AppPropsWithLayout) {
           <div className="max-w-full mt-4">
             <div className="flex justify-between items-center">
               <h3 className="text-lg font-bold">Transaction History</h3>
-              <button onClick={handleViewAllClick} className="rounded bg-white text-black px-4 py-2 mx-4">
+              {/* <button onClick={handleViewAllClick} className="rounded bg-white text-black px-4 py-2 mx-4">
                 View All
-              </button>
+              </button> */}
+              <SignMessage/>
             </div>
             <ul>
               {transactions.map((transaction) => (
