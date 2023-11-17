@@ -19,18 +19,27 @@ type Transaction = {
 
 function Test({ Component, pageProps }: AppPropsWithLayout) {
 
-  const [loanAmount, setLoanAmount] = useState<number>(0); // Example state for loan amount
-  const [loanDuration, setLoanDuration] = useState<number>(0); // Example state for loan duration
-  const [transactions, setTransactions] = useState<Transaction[]>([]); // State for transactions
+  const [loanAmount, setLoanAmount] = useState<number>(0); 
+  const [loanDuration, setLoanDuration] = useState<number>(0); 
+  const [transactions, setTransactions] = useState<Transaction[]>([]); 
 
-  // Example function to handle button clicks
+  const [icons] = useState({
+    Payback: 'Icon for Payback', 
+    History: 'Icon for History',
+    Invite: 'Icon for Invite', 
+    Account: 'Icon for Account' 
+  });
+
   const handleButtonClick = (buttonName: string) => {
     console.log(`${buttonName} pressed`);
   };
 
-  // Function to handle 'View All' click
   const handleViewAllClick = () => {
     console.log('view');
+
+    setLoanAmount(0);
+    setLoanDuration(0);
+    setTransactions([]);
   };
 
   return (
@@ -47,11 +56,15 @@ function Test({ Component, pageProps }: AppPropsWithLayout) {
           </div>
 
           {/* Container 2 */}
-          <div className="max-w-full flex justify-around items-center mt-4 rounded border p-4">
+          <div className="max-w-full flex justify-around items-center mt-4 rounded p-4">
             {['Payback', 'History', 'Invite', 'Account'].map((item) => (
-              <button key={item} onClick={() => handleButtonClick(item)} className="rounded p-2">
-                <span>{item}</span>
-              </button>
+              <div key={item} className="flex flex-col items-center">
+                <button onClick={() => handleButtonClick(item)} className="rounded p-2 border">
+                  {/* Replace with actual icon related to 'item' */}
+                  <span>Icon</span>
+                </button>
+                <p className="mt-2 text-center">{item}</p>
+              </div>
             ))}
           </div>
 
@@ -59,7 +72,7 @@ function Test({ Component, pageProps }: AppPropsWithLayout) {
           <div className="max-w-full mt-4">
             <div className="flex justify-between items-center">
               <h3 className="text-lg font-bold">Transaction History</h3>
-              <button onClick={handleViewAllClick} className="rounded bg-white text-black px-4 py-2">
+              <button onClick={handleViewAllClick} className="rounded bg-white text-black px-4 py-2 mx-4">
                 View All
               </button>
             </div>
