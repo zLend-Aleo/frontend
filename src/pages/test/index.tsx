@@ -3,6 +3,10 @@ import type { NextPageWithLayout } from '@/types';
 import Layout from '@/layouts/_layout'; // Adjust the import path as needed
 import { useState } from 'react';
 
+import { WalletNotConnectedError } from "@demox-labs/aleo-wallet-adapter-base";
+import { useWallet } from "@demox-labs/aleo-wallet-adapter-react";
+import React, { FC, useCallback } from "react";
+
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
@@ -15,10 +19,9 @@ type Transaction = {
   explorerLink: string;
 };
 
-
-
 function Test({ Component, pageProps }: AppPropsWithLayout) {
 
+  const { publicKey, requestTransactionHistory } = useWallet();
   const [loanAmount, setLoanAmount] = useState<number>(0); 
   const [loanDuration, setLoanDuration] = useState<number>(0); 
   const [transactions, setTransactions] = useState<Transaction[]>([]); 
@@ -34,12 +37,16 @@ function Test({ Component, pageProps }: AppPropsWithLayout) {
     console.log(`${buttonName} pressed`);
   };
 
-  const handleViewAllClick = () => {
+  const handleViewAllClick = async () => {
+    const program = "credits.aleo";
+    if (!publicKey) throw new WalletNotConnectedError();
+    if (requestTransactionHistory) {
+      const transactions = await requestTransactionHistory(program);
+      console.log("Transactions: " + transactions);
+    }
     console.log('view');
 
-    setLoanAmount(0);
-    setLoanDuration(0);
-    setTransactions([]);
+
   };
 
   return (
@@ -87,9 +94,6 @@ function Test({ Component, pageProps }: AppPropsWithLayout) {
             </ul>
           </div>
         </div>
-
-
-
       </Layout>
     </>
   );
