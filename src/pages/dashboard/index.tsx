@@ -15,8 +15,6 @@ type Transaction = {
   explorerLink: string;
 };
 
-
-
 function Test({ Component, pageProps }: AppPropsWithLayout) {
 
   const [loanAmount, setLoanAmount] = useState<number>(0); // Example state for loan amount
