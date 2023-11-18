@@ -38,7 +38,7 @@ const LoanForm: React.FC = () => {
                 type="number"
                 id="loanAmount"
                 value={formState.loanAmount}
-                className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight text-black focus:outline-none focus:shadow-outline"
                 placeholder="Enter amount"
                 onChange={handleLoanAmountChange}
                 min="0"
@@ -54,7 +54,7 @@ const LoanForm: React.FC = () => {
                 type="number"
                 id="loanDuration"
                 value={formState.loanDuration}
-                className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight text-black focus:outline-none focus:shadow-outline"
                 placeholder="Enter number of days"
                 onChange={handleDurationChange}
               />
