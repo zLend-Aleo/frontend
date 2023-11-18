@@ -59,7 +59,7 @@ function Test({ Component, pageProps }: AppPropsWithLayout) {
     <>
       <Layout>
 
-        <div className="flex flex-col items-center justify-center p-4 text-white">
+      <div className="flex flex-col items-center justify-center min-h-screen py-4 text-white">
           {/* Container 1 */}
           <div className="max-w-full rounded border p-4">
             <h2 className="text-lg font-bold">Loan Amount</h2>
@@ -70,7 +70,7 @@ function Test({ Component, pageProps }: AppPropsWithLayout) {
           {/* Container 2 */}
           <div className="max-w-full flex justify-around items-center mt-4 rounded p-4">
             {['Payback', 'History', 'Invite', 'Account'].map((item) => (
-              <div key={item} className="flex flex-col items-center">
+              <div key={item} className="flex flex-col items-center mx-2">
                 <button onClick={() => handleButtonClick(item)} className="rounded p-2 border">
                   {/* Replace with actual icon related to 'item' */}
                   <span>Icon</span>

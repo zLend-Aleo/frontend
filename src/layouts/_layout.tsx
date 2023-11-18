@@ -35,12 +35,11 @@ export function Header() {
         </Link>
       </div>
       <div className="hidden md:flex md:gap-x-6">
-        <Link href="/">Home</Link>
         <Link href="/request">Request</Link>
-        <Link href="/payments">Payments</Link>
+        <Link href="/payment">Payment</Link>
+        <Link href="/liquidity">Liquidity</Link>
+        <Link href="/auction">Auction</Link>
         <Link href="/account">Account</Link>
-        <Link href="/leaderboard">Leaderboard</Link>
-        <Link href="/test">Test</Link>
       </div>
       <HeaderRightArea />
     </nav>

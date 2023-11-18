@@ -13,6 +13,9 @@ import { NFTProgramId } from '@/aleo/nft-program';
 import { getSettingsFromNumber } from '@/lib/util';
 import MintCountdown from '@/components/mint/countdown';
 import { random } from 'lodash';
+import Image from 'next/image';
+import DavidBlaine from 'public/david_blaine.jpeg'
+import Link from 'next/link';
 
 type SectionProps = {
   title: string;
@@ -187,7 +190,7 @@ const MintPage: NextPageWithLayout = () => {
       );
       console.log('mint step')
     }
-    
+
     if (mintStep === MintStep.MINT) {
       const randomScalar = random(0, 100000000000) + 'scalar';
       const whitelistRecord = whitelistRecords().find(r => !r.spent);
@@ -229,9 +232,9 @@ const MintPage: NextPageWithLayout = () => {
 
     if (aleoTransaction) {
       const txId =
-      (await (wallet?.adapter as LeoWalletAdapter).requestTransaction(
-        aleoTransaction
-      )) || '';
+        (await (wallet?.adapter as LeoWalletAdapter).requestTransaction(
+          aleoTransaction
+        )) || '';
       setTransactionId(txId);
     }
   };
@@ -253,7 +256,7 @@ const MintPage: NextPageWithLayout = () => {
     sliderImages = [nftImage];
   }
 
-  
+
 
   return (
     <>
@@ -262,22 +265,25 @@ const MintPage: NextPageWithLayout = () => {
         title="Leo Wallet | Mint NFTs"
         description="Mint an NFT using the Leo Wallet"
       />
-      <div className="mx-auto max-w-md px-4 mt-12 pb-14 sm:px-6 sm:pb-20 sm:pt-12 lg:px-8 xl:px-10 2xl:px-0">
-    
-        <h2 className="mb-14 text-lg font-medium uppercase text-center tracking-wider text-gray-900 dark:text-white sm:mb-10 sm:text-2xl">
-          ALEO LEND
-        </h2>
-        {/* {timeToMint > 0 && (
+      <div className="flex flex-col items-center justify-center min-h-screen py-4">
+
+        <div className="mx-auto max-w-md ">
+          <h2 className="mb-14 text-lg font-medium uppercase text-center tracking-wider text-gray-900 dark:text-white sm:mb-10 sm:text-2xl">
+            ALEO LEND
+          </h2>
+          {/* {timeToMint > 0 && (
           <div className='flex justify-center mb-6'>
             <MintCountdown date={Date.now() + timeToMint} />
           </div>
         )} */}
-        {/* <div className='flex justify-center mb-6'>
+          {/* <div className='flex justify-center mb-6'>
             <MintCountdown date={Date.now() + timeToMint} />
             asdf
           </div> */}
-        <ImageSlider images={sliderImages} interval={5000} />
-        {/* {settingsNum !== undefined && (
+          {/* <ImageSlider images={sliderImages} interval={5000} /> */}
+          <Image src={DavidBlaine} />
+
+          {/* {settingsNum !== undefined && (
           <div className='flex justify-center my-8'>
             <Button
               className="text-xl shadow-card dark:bg-gray-700 md:h-10 md:px-5 xl:h-12 xl:px-7"
@@ -289,11 +295,21 @@ const MintPage: NextPageWithLayout = () => {
             </Button>
           </div>
         )} */}
+        </div>
+        <h2 className="py-10 text-lg font-medium uppercase text-center tracking-wider text-gray-900 dark:text-white ">
+          A crypto exchange that <b>can</b> escape from a straitjacket
+        </h2>
+        <Link href="/request">
+          <a className="bg-transparent border border-white text-white py-2 px-4 rounded">
+            Get Tied Up Today
+          </a>
+        </Link>
         {transactionId && (
           <div className='text-white text-center'>
             <div>{`Transaction status: ${status}`}</div>
           </div>
         )}
+
         {publicKey && !transactionId && (
           <div className='text-white text-center'>
             <div>{subMessage}</div>
